@@ -26,10 +26,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // Меню пользователя
 // Создай компонент UserMenu, отображающий почту пользователя и кнопку выхода из учетной записи. Вот как может выглядеть его разметка.
 
-{/* <div>
-  <p>mango@mail.com</p>
-  <button>Logout</button>
-</div> */}
+//<div>
+//  <p>mango@mail.com</p>
+//  <button>Logout</button>
+//</div>
 
 // Стилизация
 // Это финальная версия приложения, поэтому поработай над оформлением интерфейса.Можно использовать 
