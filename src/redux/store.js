@@ -10,16 +10,8 @@ import {
 } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-// import { phonebookSlice } from "./contacts/slice";
 import { authReducer } from './auth/slice';
-import { tasksReducer } from './tasks/slice';
-
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-// }
-
-// const phonebookReducer = persistReducer(persistConfig, phonebookSlice.reducer);
+import { phonebookSlice } from "./contacts/slice";
 
 const authPersistConfig = {
   key: 'auth',
@@ -30,8 +22,7 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    tasks: tasksReducer,
-    // phonebook: phonebookReducer,
+    phonebook: phonebookSlice.reducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
@@ -41,7 +32,7 @@ export const store = configureStore({
       },
     });
   },
-  devTools: process.env.NODE_ENV === 'development',
+  // devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

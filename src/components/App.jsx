@@ -6,12 +6,6 @@ import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchContacts } from "redux/operations";
-// import { selectContactsState } from "redux/contacts/selectors";
-// import ContactForm from "./ContactForm";
-// import ContactList from "./ContactList";
-// import Filter from "./Filter"
 
 const HomePage = lazy(() => import("pages/Home"));
 const LoginPage = lazy(() => import("pages/Login"));
@@ -50,9 +44,6 @@ export function App() {
             <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
-        {/* <Route path="login" element={<LoginPage />}></Route>
-        <Route path="register" element={<RegisterPage />}></Route>
-        <Route path="contacts" element={<ContactsPage />}></Route> */}
         <Route path="*" element={<HomePage />}></Route>
       </Route>
     </Routes>

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import toast from 'react-hot-toast';
 import { addContact } from "redux/contacts/operations";
 import { selectContactsAll } from "redux/contacts/selectors";
 import css from './ContactForm.module.css'
 
-export default function ContactForm() {
+export function ContactForm() {
     const [name, setName] = useState('');//'Name Names'
-    const [phone, setPhone] = useState('');//'123-456-789'
+    const [number, setNumber] = useState('');//'123-456-789'
     const contacts = useSelector(selectContactsAll);
     const dispatch = useDispatch();
   
@@ -22,17 +23,18 @@ export default function ContactForm() {
         event.preventDefault();
 
         if (checkContact(name)) {
-            window.alert(`${name} is already in contacts.`);
+            toast.error(`${name} is already in contacts.`);
+            //window.alert(`${name} is already in contacts.`);
             return;
         }
         
-        dispatch(addContact({ name, phone }));
+        dispatch(addContact({ name, number }));
         reset();
     }
 
     const reset = () => {
         setName('');
-        setPhone('');
+        setNumber('');
     }
         
     const handleInputChangeName = event => {
@@ -40,7 +42,7 @@ export default function ContactForm() {
     }
 
     const handleInputChangeNumber = event => {
-        setPhone(event.currentTarget.value);
+        setNumber(event.currentTarget.value);
     }
 
     return (
@@ -58,14 +60,14 @@ export default function ContactForm() {
                 />
             </label>
             <label>
-                Phone
+                Phone number
                 <input
                     type="tel"
-                    name="phone"
+                    name="number"
                     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                     required
-                    value={phone}
+                    value={number}
                     onChange={handleInputChangeNumber}
                 />
             </label>
