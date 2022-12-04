@@ -10,18 +10,28 @@ import {
 } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import { phonebookSlice } from "./phonebookSlice";
+// import { phonebookSlice } from "./contacts/slice";
+import { authReducer } from './auth/slice';
+import { tasksReducer } from './tasks/slice';
 
-const persistConfig = {
-    key: 'root',
-    storage,
-}
+// const persistConfig = {
+//     key: 'root',
+//     storage,
+// }
 
-const phonebookReducer = persistReducer(persistConfig, phonebookSlice.reducer);
+// const phonebookReducer = persistReducer(persistConfig, phonebookSlice.reducer);
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 export const store = configureStore({
   reducer: {
-    phonebook: phonebookReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
+    tasks: tasksReducer,
+    // phonebook: phonebookReducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
@@ -31,6 +41,7 @@ export const store = configureStore({
       },
     });
   },
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);
